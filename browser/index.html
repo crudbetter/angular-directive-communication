@@ -1,0 +1,38 @@
+<html ng-app="directiveCommunication">
+	<head>
+		<meta charset="UTF-8" />
+		<title>angular-directive-communication</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+	</head>
+	<body>
+		<h1>Exploring communication between directives in AngularJS</h1>
+
+		<!--ratings title="JavaScript">
+			<category-count></category-count>
+			<category-count></category-count>
+			<category-count></category-count> 
+		</ratings>
+
+		<ratings title="Frameworks">
+			<category-count></category-count>
+			<category-count></category-count>
+		</ratings-->
+
+		<div ng-controller="CategoryCtrl">
+      <div ng-controller="ArticleCtrl">
+        <div ng-repeat="article in articles">
+          <p>{{article.title}}</p>
+          <p>- {{article.author}}</p>
+          <button ng-repeat="category in categories" ng-click="assignCategory(category, article)">
+            {{category.name}}
+          </button>
+        </div>
+      </div>
+    </div>
+
+		<script src="../node_modules/angular/angular.js"></script>
+		<script src="app.js"></script>
+		<script src="controllers/article.js"></script>
+		<script src="controllers/category.js"></script>
+	</body>
+</html> 
