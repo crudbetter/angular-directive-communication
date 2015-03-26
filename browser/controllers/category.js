@@ -1,21 +1,36 @@
 angular.module('directiveCommunication.controllers')
 
 	.controller('CategoryCtrl', function($scope) {
-		var categories;
+		function Category(title) {
+			this.title = title;
+			this.articles = [];
+		}
 
-		$scope.categories = categories = {
-			'ES6': [],
-			'AngularJS': [],
-			'React': []
-		};
+		Category.prototype.contains = function(article) {
+			return this.articles.indexOf(article) >= 0;
+		}
 
-		$scope.categorize = function(articles, article) {
-			var index = articles.indexOf(article);
+		Category.prototype.toggle = function(article) {
+			var index = this.articles.indexOf(article);
 			
 			if (index == -1) {
-				articles.push(article);
+				this.articles.push(article);
 			} else {
-				articles.splice(index, 1);
+				this.articles.splice(index, 1);
 			}
-		};
+		}
+
+		$scope.categories = [
+			new Category('ES6'),
+			new Category('AngularJS'),
+			new Category('React')
+		];
+
+		$scope.$watchCollection('categories', function(categories) {
+			$scope.categoryMap = categories.reduce(function(map, category) {
+				map[category.title] = category.articles;
+				return map;
+			}, {});
+		})
+
 	});

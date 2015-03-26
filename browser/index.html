@@ -9,14 +9,14 @@
 
 		<div ng-controller="CategoryCtrl">
 			<ratings title="JavaScript">
-				<article-count category="{{categories['ES6']}}"></article-count>
-				<article-count category="{{categories['AngularJS']}}"></article-count>
-				<article-count category="{{categories['React']}}"></article-count> 
+				<article-count category="{{categoryMap['ES6']}}"></article-count>
+				<article-count category="{{categoryMap['AngularJS']}}"></article-count>
+				<article-count category="{{categoryMap['React']}}"></article-count> 
 			</ratings>
 
 			<ratings title="Frameworks">
-				<article-count category="{{categories['AngularJS']}}"></article-count>
-				<article-count category="{{categories['React']}}"></article-count> 
+				<article-count category="{{categoryMap['AngularJS']}}"></article-count>
+				<article-count category="{{categoryMap['React']}}"></article-count> 
 			</ratings>
 		</div>
 
@@ -25,13 +25,14 @@
         <div ng-repeat="article in articles">
           <p>{{article.title}}</p>
           <p>- {{article.author}}</p>
-          <label ng-repeat="(key, val) in categories">
-          	<input type="checkbox" ng-checked="val.indexOf(article) >= 0" ng-click="categorize(val, article)" />
-          	{{key}}
+          <label ng-repeat="category in categories">
+          	<input type="checkbox" ng-checked="category.contains(article)" ng-click="category.toggle(article)" />
+          	{{category.title}}
           </label>
         </div>
       </div>
-      <span ng-repeat="(key, val) in categories">{{key + ' : ' +val.length}}</span>
+      <div ng-repeat="category in categories">{{category.title + ' : ' + category.articles.length}}</div>
+      <div>{{categoryMap}}</div>
     </div>
 
 		<script src="../node_modules/angular/angular.js"></script>
