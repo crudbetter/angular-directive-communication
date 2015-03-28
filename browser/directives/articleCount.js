@@ -5,20 +5,27 @@ angular.module('directiveCommunication.directives')
 			restrict: 'E',
 			require: '^ratings',
 			scope: {
-				articles: '@'
+				articles: '@',
+				title: '@'
 			},
 			template: 
-				'<div ng-repeat="author in authors">' +
-					'<span>' +
-						'{{author.name}}' +
-					'</span>' +
-				'</div>',
+				'<section>' +
+					'<h4>{{title}}</h4>' +
+					'<ul>' +
+						'<li ng-repeat="(name, articleCount) in authors">{{name}} : {{articleCount}}</li>' +
+					'</ul>' +
+				'</section>',
 			link: function(scope, el, attrs, ratingsCtrl) {
 				ratingsCtrl.addContributor(scope);
 
-				/*scope.$watchCollection('articles', function(newArticles, oldArticles) {
-					ratingsCtrl.recalculate();
-				});*/
+				scope.$watchCollection('articles', function(articles) {
+					scope.authors = JSON.parse(articles).reduce(function(map, article) {
+						map[article.author] ?
+							map[article.author]++ :
+							map[article.author] = 1;
+						return map;
+					}, {});
+				});
 			}
 		};
 	});

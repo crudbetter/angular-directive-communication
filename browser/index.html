@@ -9,18 +9,20 @@
 
 		<div ng-controller="CategoryCtrl">
 			<ratings title="JavaScript">
-				<article-count category="{{categoryMap['ES6']}}"></article-count>
-				<article-count category="{{categoryMap['AngularJS']}}"></article-count>
-				<article-count category="{{categoryMap['React']}}"></article-count> 
+				<article-count title="ES6" articles="{{categoryArticles['ES6']}}"></article-count>
+				<article-count title="Angular" articles="{{categoryArticles['AngularJS']}}"></article-count>
+				<article-count title="React" articles="{{categoryArticles['React']}}"></article-count> 
 			</ratings>
 
-			<ratings title="Frameworks">
-				<article-count category="{{categoryMap['AngularJS']}}"></article-count>
-				<article-count category="{{categoryMap['React']}}"></article-count> 
+			<!--ratings title="Frameworks">
+				<article-count articles="categoryArticles['AngularJS']"></article-count>
+				<article-count articles="categoryArticles['React']"></article-count> 
 			</ratings>
-		</div>
 
-		<div ng-controller="CategoryCtrl">
+			<ratings title="All">
+				<article-count ng-repeat="category in categories" articles="category.articles"></article-count>
+			</ratings-->
+
       <div ng-controller="ArticleCtrl">
         <div ng-repeat="article in articles">
           <p>{{article.title}}</p>
@@ -31,13 +33,13 @@
           </label>
         </div>
       </div>
-      <div ng-repeat="category in categories">{{category.title + ' : ' + category.articles.length}}</div>
-      <div>{{categoryMap}}</div>
     </div>
 
 		<script src="../node_modules/angular/angular.js"></script>
 		<script src="app.js"></script>
 		<script src="controllers/article.js"></script>
 		<script src="controllers/category.js"></script>
+		<script src="directives/articleCount.js"></script>
+		<script src="directives/ratings.js"></script>
 	</body>
 </html> 

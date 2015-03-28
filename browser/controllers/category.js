@@ -27,7 +27,7 @@ angular.module('directiveCommunication.controllers')
 		];
 
 		$scope.$watchCollection('categories', function(categories) {
-			$scope.categoryMap = categories.reduce(function(map, category) {
+			$scope.categoryArticles = categories.reduce(function(map, category) {
 				map[category.title] = category.articles;
 				return map;
 			}, {});

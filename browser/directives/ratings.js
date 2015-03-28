@@ -18,11 +18,11 @@ angular.module('directiveCommunication.directives')
 			controller: 'RatingsCtrl',
 			transclude: true,
 			scope: {
-				name: '@'
+				title: '@'
 			},
 			template:
-				'<div>' 
-					'<span>Ratings for {{name}}</span>' +
+				'<div>' + 
+					'<span>Ratings for {{title}}</span>' +
 					'<div ng-transclude />' +
 				'</div>',
 			link: function(scope, el, attrs, ratingsCtrl) {
