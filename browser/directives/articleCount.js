@@ -8,24 +8,37 @@ angular.module('directiveCommunication.directives')
 				articles: '@',
 				title: '@'
 			},
-			template: 
-				'<section>' +
-					'<h4>{{title}}</h4>' +
-					'<ul>' +
-						'<li ng-repeat="(name, articleCount) in authors">{{name}} : {{articleCount}}</li>' +
-					'</ul>' +
-				'</section>',
+			templateUrl: 'template/articleCount.html',
 			link: function(scope, el, attrs, ratingsCtrl) {
+				var topAuthors = [];
+				var topArticleCount = 0;
+
 				ratingsCtrl.addContributor(scope);
 
-				scope.$watchCollection('articles', function(articles) {
-					scope.authors = JSON.parse(articles).reduce(function(map, article) {
-						map[article.author] ?
-							map[article.author]++ :
-							map[article.author] = 1;
-						return map;
-					}, {});
+				scope.$watchCollection('articles', function(newArticles, oldArticles) {
+					scope.articlesByAuthor = {};
+
+					JSON.parse(newArticles).forEach(function(article) {
+						scope.articlesByAuthor[article.author] = Array.prototype.concat(scope.articlesByAuthor[article.author] || [], article);
+					});
+
+					topArticleCount = 0;
+
+					Object.keys(scope.articlesByAuthor).forEach(function(author) {
+						var articleCount = scope.articlesByAuthor[author].length;
+
+						if (articleCount > topArticleCount) {
+							topAuthors.splice(0, topAuthors.length, author);
+							topArticleCount = articleCount;
+						} else if (articleCount == topArticleCount) {
+							topAuthors.length = 0;
+						}
+					})§
 				});
+
+				scope.isTopAuthor = function(author) {
+					return topAuthors.indexOf(author) >= 0;
+				};
 			}
 		};
 	});

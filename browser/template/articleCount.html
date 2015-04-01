@@ -1,0 +1,9 @@
+<div>
+	<span>{{title}}</span>
+	<ul>
+	<li ng-repeat="(author, articles) in articlesByAuthor">
+		{{author}} : {{articles.length}}
+		<span ng-if="isTopAuthor(author)">*</span>
+	</li>
+	</ul>
+</div>

@@ -6,10 +6,6 @@ angular.module('directiveCommunication.directives')
 		this.addContributor = function(contributorScope) {
 			contributors.push(contributorScope);
 		};
-
-		this.recalculate = function() {
-			
-		}
 	})
 
 	.directive('ratings', function() {
@@ -24,9 +20,6 @@ angular.module('directiveCommunication.directives')
 				'<div>' + 
 					'<span>Ratings for {{title}}</span>' +
 					'<div ng-transclude />' +
-				'</div>',
-			link: function(scope, el, attrs, ratingsCtrl) {
-
-			}
+				'</div>'
 		};
 	});

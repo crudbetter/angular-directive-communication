@@ -3,27 +3,25 @@
 		<meta charset="UTF-8" />
 		<title>angular-directive-communication</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<link href="styles.css" rel="stylesheet" />
 	</head>
 	<body>
 		<h1>Exploring communication between directives in AngularJS</h1>
 
 		<div ng-controller="CategoryCtrl">
-			<ratings title="JavaScript">
+
+			<ratings class="column" title="JavaScript">
 				<article-count title="ES6" articles="{{categoryArticles['ES6']}}"></article-count>
-				<article-count title="Angular" articles="{{categoryArticles['AngularJS']}}"></article-count>
+				<article-count title="NG" articles="{{categoryArticles['AngularJS']}}"></article-count>
 				<article-count title="React" articles="{{categoryArticles['React']}}"></article-count> 
 			</ratings>
 
-			<!--ratings title="Frameworks">
-				<article-count articles="categoryArticles['AngularJS']"></article-count>
-				<article-count articles="categoryArticles['React']"></article-count> 
+			<ratings class="column" title="Frameworks">
+				<article-count title="NG" articles="{{categoryArticles['AngularJS']}}"></article-count>
+				<article-count title="React "articles="{{categoryArticles['React']}}"></article-count> 
 			</ratings>
 
-			<ratings title="All">
-				<article-count ng-repeat="category in categories" articles="category.articles"></article-count>
-			</ratings-->
-
-      <div ng-controller="ArticleCtrl">
+      <div class="column" ng-controller="ArticleCtrl">
         <div ng-repeat="article in articles">
           <p>{{article.title}}</p>
           <p>- {{article.author}}</p>
@@ -33,6 +31,7 @@
           </label>
         </div>
       </div>
+
     </div>
 
 		<script src="../node_modules/angular/angular.js"></script>
