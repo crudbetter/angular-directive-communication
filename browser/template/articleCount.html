@@ -1,8 +1,8 @@
 <div>
 	<span>{{title}}</span>
 	<ul>
-	<li ng-repeat="(author, articles) in articlesByAuthor">
-		{{author}} : {{articles.length}}
+	<li ng-repeat="(author, articles) in articlesByAuthor" ng-class="{highlight: $parent.isTopAuthor(author)}">
+		{{author}}
 		<span ng-if="isTopAuthor(author)">*</span>
 	</li>
 	</ul>

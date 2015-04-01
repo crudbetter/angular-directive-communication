@@ -3,3 +3,11 @@
 	vertical-align: top;
 	width: 33%;
 }
+
+.highlight {
+	background-color: orange;
+}
+
+li {
+	list-style-type: none;
+}

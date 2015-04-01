@@ -10,22 +10,24 @@ angular.module('directiveCommunication.directives')
 			},
 			templateUrl: 'template/articleCount.html',
 			link: function(scope, el, attrs, ratingsCtrl) {
+				var articlesByAuthor = {};
 				var topAuthors = [];
 				var topArticleCount = 0;
 
 				ratingsCtrl.addContributor(scope);
 
 				scope.$watchCollection('articles', function(newArticles, oldArticles) {
-					scope.articlesByAuthor = {};
+					scope.articlesByAuthor = articlesByAuthor = {};
 
 					JSON.parse(newArticles).forEach(function(article) {
-						scope.articlesByAuthor[article.author] = Array.prototype.concat(scope.articlesByAuthor[article.author] || [], article);
+						articlesByAuthor[article.author] = Array.prototype.concat(articlesByAuthor[article.author] || [], article);
 					});
 
+					scope.topAuthors = topAuthors;
 					topArticleCount = 0;
 
-					Object.keys(scope.articlesByAuthor).forEach(function(author) {
-						var articleCount = scope.articlesByAuthor[author].length;
+					Object.keys(articlesByAuthor).forEach(function(author) {
+						var articleCount = articlesByAuthor[author].length;
 
 						if (articleCount > topArticleCount) {
 							topAuthors.splice(0, topAuthors.length, author);
@@ -33,7 +35,7 @@ angular.module('directiveCommunication.directives')
 						} else if (articleCount == topArticleCount) {
 							topAuthors.length = 0;
 						}
-					})§
+					});
 				});
 
 				scope.isTopAuthor = function(author) {
