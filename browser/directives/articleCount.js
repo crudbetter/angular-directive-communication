@@ -10,37 +10,44 @@ angular.module('directiveCommunication.directives')
 			},
 			templateUrl: 'template/articleCount.html',
 			link: function(scope, el, attrs, ratingsCtrl) {
-				var articlesByAuthor = {};
-				var topAuthors = [];
-				var topArticleCount = 0;
-
 				ratingsCtrl.addContributor(scope);
 
 				scope.$watchCollection('articles', function(newArticles, oldArticles) {
-					scope.articlesByAuthor = articlesByAuthor = {};
+					var authorsByName = {};
+					var topArticleCount = 0;
+					var oneOrMoreTopForCategory = false;
+
+					scope.authorsByName = authorsByName;
 
 					JSON.parse(newArticles).forEach(function(article) {
-						articlesByAuthor[article.author] = Array.prototype.concat(articlesByAuthor[article.author] || [], article);
-					});
+						if (authorsByName[article.author]) {
+							authorsByName[article.author].articleCount++;
+						} else {
+							authorsByName[article.author] = { articleCount: 1 };
+						}
 
-					scope.topAuthors = topAuthors;
-					topArticleCount = 0;
-
-					Object.keys(articlesByAuthor).forEach(function(author) {
-						var articleCount = articlesByAuthor[author].length;
-
-						if (articleCount > topArticleCount) {
-							topAuthors.splice(0, topAuthors.length, author);
-							topArticleCount = articleCount;
-						} else if (articleCount == topArticleCount) {
-							topAuthors.length = 0;
+						if (authorsByName[article.author].articleCount > topArticleCount) {
+							topArticleCount = authorsByName[article.author].articleCount;
 						}
 					});
-				});
 
-				scope.isTopAuthor = function(author) {
-					return topAuthors.indexOf(author) >= 0;
-				};
+					for (var author in authorsByName) {
+						if (authorsByName[author].articleCount == topArticleCount) {
+							authorsByName[author].topForCategory = true;
+							if (oneOrMoreTopForCategory) {
+								authors.forEach(function(author) {
+									authorsByName[author].topForCategory = false;
+								});
+								break;
+							}
+							oneOrMoreTopForCategory = true;
+						} else {
+							authorsByName[author].topForCategory = false;
+						}
+					}
+
+					//ratingsCtrl.recalc();
+				});
 			}
 		};
 	});

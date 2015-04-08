@@ -1,9 +1,20 @@
 <div>
 	<span>{{title}}</span>
 	<ul>
-	<li ng-repeat="(author, articles) in articlesByAuthor" ng-class="{highlight: $parent.isTopAuthor(author)}">
-		{{author}}
-		<span ng-if="isTopAuthor(author)">*</span>
-	</li>
+		<!--li ng-repeat="(author, articles) in articlesByAuthor" 
+				ng-class="{highlight: author.isTopForGrouping}">
+			{{author.name}}
+			<span ng-if="author.isTopForCategory">*</span>
+		</li-->
+		<!--li ng-repeat="author in authors"
+				ng-class="{highlight: author.isTopForGrouping}">
+			{{author.name}}
+			<span ng-if="author.isTopForCategory">*</span>
+		</li-->
+		<li ng-repeat="(name, author) in authorsByName"
+				ng-class="{highlight: author.topForGrouping}">
+			{{name}}
+			<span ng-if="author.topForCategory">*</span>
+		</li>
 	</ul>
 </div>
