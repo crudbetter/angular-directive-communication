@@ -11,10 +11,10 @@
 			{{author.name}}
 			<span ng-if="author.isTopForCategory">*</span>
 		</li-->
-		<li ng-repeat="(name, author) in authorsByName"
-				ng-class="{highlight: author.topForGrouping}">
+		<li ng-repeat="(name, rating) in authorRatings"
+				ng-class="{ highlight: rating.topForGrouping }">
 			{{name}}
-			<span ng-if="author.topForCategory">*</span>
+			<span ng-if="rating.topForCategory(title)">*</span>
 		</li>
 	</ul>
 </div>

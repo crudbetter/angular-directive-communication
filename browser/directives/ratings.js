@@ -1,47 +1,40 @@
 angular.module('directiveCommunication.directives')
 
 	.controller('RatingsCtrl', function($scope) {
-		var contributors = [];
-		var topAuthors = [];
+		var authorRatings = {};
+		var topCategoryCount = 0;
 
-		this.addContributor = function(contributorScope) {
-			contributors.push(contributorScope);
+		function AuthorRating() {
+			this.topForCategories = [];
+			this.isTopForGrouping = false;
+		}
 
-			/*contributorScope.$watchCollection('topAuthors', function(newTopAuthors, oldTopAuthors) {
-				if (!angular.isArray(newTopAuthors)) {
-					return;
-				}
+		AuthorRating.prototype.topForCategory = function(category) {
+			return this.topForCategories.indexOf(category) >= 0;
+		}
 
-				var contributorsByAuthor = {};
+		this.getAuthorRating = function(name) {
+			if (!authorRatings[name]) {
+				authorRatings[name] = new AuthorRating();
+			}
 
-				contributors.forEach(function(contributor) {
-					contributor.topAuthors.forEach(function(author) {
-						contributorsByAuthor[author] = Array.prototype.concat(contributorsByAuthor[author] || [], contributor);
-					});
-				});
+			return authorRatings[name];
+		}
 
-				$scope.topAuthors = topAuthors;
-					topAuthors.length = 0;
-					topContributorCount = 0;
+		this.updateAuthorRating = function(name, category, isTop) {
+			var rating = authorRatings[name];
 
-					Object.keys(contributorsByAuthor).forEach(function(author) {
-						var contributorCount = contributorsByAuthor[author].length;
+			if (isTop) {
+				rating.topForCategories.push(category);
+			} else {
+				rating.topForCategories.splice(rating.topForCategories.indexOf(category), 1);
+			}
 
-						if (contributorCount > topContributorCount) {
-							topAuthors.splice(0, topAuthors.length, author);
-							topContributorCount = contributorCount;
-						} else if (contributorCount == topContributorCount) {
-							topAuthors.length = 0;
-						}
-					});
-			});*/
-		};
-
-		this.recalc = function() {
-			contributors.forEach(function(contributor) {
-				
-			});
-		};
+			if (rating.topForCategories.length >= topCategoryCount) {
+				rating.topForGrouping = true;
+				topCategoryCount = rating.topForCategories.length;
+			} // else { TODO }
+		}
 	})
 
 	.directive('ratings', function() {
@@ -53,8 +46,7 @@ angular.module('directiveCommunication.directives')
 				title: '@'
 			},
 			template:
-				'<div>' + 
-					'<span>{{topAuthors}}</span>' + 
+				'<div>' +
 					'<span>Ratings for {{title}}</span>' +
 					'<div ng-transclude />' +
 				'</div>'
