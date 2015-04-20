@@ -2,7 +2,6 @@ angular.module('directiveCommunication.directives')
 
 	.controller('RatingsCtrl', function($scope) {
 		var authorRatings = {};
-		var topCategoryCount = 0;
 
 		function AuthorRating() {
 			this.topForCategories = [];
@@ -23,18 +22,45 @@ angular.module('directiveCommunication.directives')
 
 		this.updateAuthorRating = function(name, category, isTop) {
 			var rating = authorRatings[name];
+			var categoryIndex = rating.topForCategories.indexOf(category);
 
-			if (isTop) {
-				rating.topForCategories.push(category);
-			} else {
-				rating.topForCategories.splice(rating.topForCategories.indexOf(category), 1);
-			}
+			var spliceArgs = [
+				categoryIndex >= 0 ? categoryIndex : rating.topForCategories.length,
+				1
+			];
 
-			if (rating.topForCategories.length >= topCategoryCount) {
-				rating.topForGrouping = true;
-				topCategoryCount = rating.topForCategories.length;
-			} // else { TODO }
+			isTop && spliceArgs.push(category);
+
+			Array.prototype.splice.apply(rating.topForCategories, spliceArgs);
 		}
+
+		this.reset = function(category) {
+			var authors = Object.keys(authorRatings);
+
+			authors.forEach(function(author) {
+				var rating = authorRatings[author];
+				var categoryIndex = rating.topForCategories.indexOf(category);
+				
+				if (categoryIndex >= 0) {
+					rating.topForCategories.splice(categoryIndex, 1);
+				}
+			});
+		}
+
+		this.update = function() {
+			var authors = Object.keys(authorRatings);
+			var topCategoryCount = Math.max.apply(null,
+				authors.reduce(function(topCategoryCounts, author) {
+					return topCategoryCounts.concat([authorRatings[author].topForCategories.length]);
+				}, [])
+			);
+
+			authors.forEach(function(author) {
+				authorRatings[author].isTopForGrouping = 
+					authorRatings[author].topForCategories.length == topCategoryCount;
+			});
+		}
+
 	})
 
 	.directive('ratings', function() {
@@ -45,10 +71,6 @@ angular.module('directiveCommunication.directives')
 			scope: {
 				title: '@'
 			},
-			template:
-				'<div>' +
-					'<span>Ratings for {{title}}</span>' +
-					'<div ng-transclude />' +
-				'</div>'
+			templateUrl: 'template/ratings.html'
 		};
 	});

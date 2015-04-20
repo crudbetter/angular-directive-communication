@@ -10,46 +10,9 @@ angular.module('directiveCommunication.directives')
 			},
 			templateUrl: 'template/articleCount.html',
 			link: function(scope, el, attrs, ratingsCtrl) {
-
-				/*scope.$watchCollection('articles', function(newArticles, oldArticles) {
-					var authorsByName = {};
-					var topArticleCount = 0;
-					var oneOrMoreTopForCategory = false;
-
-					JSON.parse(newArticles).forEach(function(article) {
-						if (authorsByName[article.author]) {
-							authorsByName[article.author].articleCount++;
-						} else {
-							authorsByName[article.author] = { 
-								articleCount: 1
-							};
-						}
-
-						if (authorsByName[article.author].articleCount > topArticleCount) {
-							topArticleCount = authorsByName[article.author].articleCount;
-						}
-					});
-
-					for (var author in authorsByName) {
-						if (authorsByName[author].articleCount == topArticleCount) {
-							authorsByName[author].topForCategory = true;
-							if (oneOrMoreTopForCategory) {
-								Object.keys(authorsByName).forEach(function(name) {
-									authorsByName[name].topForCategory = false;
-								});
-								break;
-							}
-							oneOrMoreTopForCategory = true;
-						} else {
-							authorsByName[author].topForCategory = false;
-						}
-					}
-				});*/
-
 				scope.$watchCollection('articles', function(articles) {
 					var articleCounts = {};
 					var topArticleCount = 0;
-					var oneOrMoreTopForCategory = false;
 
 					JSON.parse(articles).forEach(function(article) {
 						if (articleCounts[article.author]) {
@@ -65,6 +28,8 @@ angular.module('directiveCommunication.directives')
 
 					scope.authorRatings = {};
 
+					ratingsCtrl.reset(scope.title);
+
 					for (var author in articleCounts) {
 						scope.authorRatings[author] = ratingsCtrl.getAuthorRating(author);
 						
@@ -74,6 +39,8 @@ angular.module('directiveCommunication.directives')
 							ratingsCtrl.updateAuthorRating(author, scope.title, false);
 						}
 					}
+
+					ratingsCtrl.update();
 				});
 			}
 		};
