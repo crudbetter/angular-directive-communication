@@ -16,10 +16,10 @@
 				<article-count title="React" articles="{{categoryArticles['React']}}"></article-count> 
 			</ratings>
 
-			<!--ratings class="column" title="Frameworks">
+			<ratings class="column" title="Frameworks">
 				<article-count title="NG" articles="{{categoryArticles['AngularJS']}}"></article-count>
 				<article-count title="React "articles="{{categoryArticles['React']}}"></article-count> 
-			</ratings-->
+			</ratings>
 
       <div class="column" ng-controller="ArticleCtrl">
         <div ng-repeat="article in articles">
@@ -40,5 +40,6 @@
 		<script src="controllers/category.js"></script>
 		<script src="directives/articleCount.js"></script>
 		<script src="directives/ratings.js"></script>
+		<script src="models/authorRating.js"></script>
 	</body>
 </html> 

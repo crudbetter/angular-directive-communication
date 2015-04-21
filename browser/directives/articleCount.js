@@ -28,19 +28,14 @@ angular.module('directiveCommunication.directives')
 
 					scope.authorRatings = {};
 
-					ratingsCtrl.reset(scope.title);
+					ratingsCtrl.resetCategory(scope.title);
 
 					for (var author in articleCounts) {
 						scope.authorRatings[author] = ratingsCtrl.getAuthorRating(author);
-						
-						if (articleCounts[author] == topArticleCount) {
-							ratingsCtrl.updateAuthorRating(author, scope.title, true);
-						} else {
-							ratingsCtrl.updateAuthorRating(author, scope.title, false);
-						}
+						scope.authorRatings[author].updateCategory(scope.title, articleCounts[author] == topArticleCount);
 					}
 
-					ratingsCtrl.update();
+					ratingsCtrl.updateGrouping();
 				});
 			}
 		};

@@ -1,16 +1,7 @@
 angular.module('directiveCommunication.directives')
 
-	.controller('RatingsCtrl', function($scope) {
+	.controller('RatingsCtrl', function($scope, AuthorRating) {
 		var authorRatings = {};
-
-		function AuthorRating() {
-			this.topForCategories = [];
-			this.isTopForGrouping = false;
-		}
-
-		AuthorRating.prototype.topForCategory = function(category) {
-			return this.topForCategories.indexOf(category) >= 0;
-		}
 
 		this.getAuthorRating = function(name) {
 			if (!authorRatings[name]) {
@@ -20,34 +11,13 @@ angular.module('directiveCommunication.directives')
 			return authorRatings[name];
 		}
 
-		this.updateAuthorRating = function(name, category, isTop) {
-			var rating = authorRatings[name];
-			var categoryIndex = rating.topForCategories.indexOf(category);
-
-			var spliceArgs = [
-				categoryIndex >= 0 ? categoryIndex : rating.topForCategories.length,
-				1
-			];
-
-			isTop && spliceArgs.push(category);
-
-			Array.prototype.splice.apply(rating.topForCategories, spliceArgs);
-		}
-
-		this.reset = function(category) {
-			var authors = Object.keys(authorRatings);
-
-			authors.forEach(function(author) {
-				var rating = authorRatings[author];
-				var categoryIndex = rating.topForCategories.indexOf(category);
-				
-				if (categoryIndex >= 0) {
-					rating.topForCategories.splice(categoryIndex, 1);
-				}
+		this.resetCategory = function(category) {
+			Object.keys(authorRatings).forEach(function(author) {
+				authorRatings[author].resetCategory(category);
 			});
 		}
 
-		this.update = function() {
+		this.updateGrouping = function() {
 			var authors = Object.keys(authorRatings);
 			var topCategoryCount = Math.max.apply(null,
 				authors.reduce(function(topCategoryCounts, author) {
@@ -56,11 +26,9 @@ angular.module('directiveCommunication.directives')
 			);
 
 			authors.forEach(function(author) {
-				authorRatings[author].isTopForGrouping = 
-					authorRatings[author].topForCategories.length == topCategoryCount;
+				authorRatings[author].updateGrouping(topCategoryCount);
 			});
 		}
-
 	})
 
 	.directive('ratings', function() {
