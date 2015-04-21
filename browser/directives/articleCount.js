@@ -1,9 +1,9 @@
 angular.module('directiveCommunication.directives')
 
-	.directive('articleCount', function() {
+	.directive('articleCount', function(AuthorRating) {
 		return {
 			restrict: 'E',
-			require: '^ratings',
+			require: '?^ratings',
 			scope: {
 				articles: '@',
 				title: '@'
@@ -28,14 +28,14 @@ angular.module('directiveCommunication.directives')
 
 					scope.authorRatings = {};
 
-					ratingsCtrl.resetCategory(scope.title);
+					ratingsCtrl && ratingsCtrl.resetCategory(scope.title);
 
 					for (var author in articleCounts) {
-						scope.authorRatings[author] = ratingsCtrl.getAuthorRating(author);
+						scope.authorRatings[author] = ratingsCtrl ? ratingsCtrl.getAuthorRating(author) : new AuthorRating();
 						scope.authorRatings[author].updateCategory(scope.title, articleCounts[author] == topArticleCount);
 					}
 
-					ratingsCtrl.updateGrouping();
+					ratingsCtrl && ratingsCtrl.updateGrouping();
 				});
 			}
 		};

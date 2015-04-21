@@ -21,6 +21,10 @@
 				<article-count title="React "articles="{{categoryArticles['React']}}"></article-count> 
 			</ratings>
 
+			<div class="column">
+				<article-count title="NG Only" articles="{{categoryArticles['AngularJS']}}"></article-count>
+			</div>
+
       <div class="column" ng-controller="ArticleCtrl">
         <div ng-repeat="article in articles">
           <p>{{article.title}}</p>
