@@ -3,7 +3,7 @@ angular.module('directiveCommunication.directives')
 	.directive('articleCount', function(AuthorRating) {
 		return {
 			restrict: 'E',
-			require: '?^ratings',
+			require: '?^authorRatings',
 			scope: {
 				articles: '@',
 				title: '@'

@@ -10,16 +10,16 @@
 
 		<div ng-controller="CategoryCtrl">
 
-			<ratings class="column" title="JavaScript">
+			<author-ratings class="column" title="JavaScript">
 				<article-count title="ES6" articles="{{categories['ES6'].articles}}"></article-count>
 				<article-count title="NG" articles="{{categories['AngularJS'].articles}}"></article-count>
 				<article-count title="React" articles="{{categories['React'].articles}}"></article-count> 
-			</ratings>
+			</author-ratings>
 
-			<ratings class="column" title="Frameworks">
+			<author-ratings class="column" title="Frameworks">
 				<article-count title="NG" articles="{{categories['AngularJS'].articles}}"></article-count>
 				<article-count title="React "articles="{{categories['React'].articles}}"></article-count> 
-			</ratings>
+			</author-ratings>
 
 			<div class="column">
 				<article-count title="NG Only" articles="{{categories['AngularJS'].articles}}"></article-count>
@@ -43,7 +43,7 @@
 		<script src="controllers/article.js"></script>
 		<script src="controllers/category.js"></script>
 		<script src="directives/articleCount.js"></script>
-		<script src="directives/ratings.js"></script>
+		<script src="directives/authorRatings.js"></script>
 		<script src="models/authorRating.js"></script>
 	</body>
 </html> 

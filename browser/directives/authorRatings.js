@@ -1,6 +1,6 @@
 angular.module('directiveCommunication.directives')
 
-	.controller('RatingsCtrl', function($scope, AuthorRating) {
+	.controller('AuthorRatingsCtrl', function($scope, AuthorRating) {
 		var authorRatings = {};
 
 		this.getAuthorRating = function(name) {
@@ -31,10 +31,10 @@ angular.module('directiveCommunication.directives')
 		}
 	})
 
-	.directive('ratings', function() {
+	.directive('authorRatings', function() {
 		return {
 			restrict: 'E',
-			controller: 'RatingsCtrl',
+			controller: 'AuthorRatingsCtrl',
 			transclude: true,
 			scope: {
 				title: '@'
