@@ -2,14 +2,10 @@ angular.module('directiveCommunication.controllers')
 
 	.controller('ArticleCtrl', function($scope) {
 
-		function Article(title, author) {
-			this.title = title;
-			this.author = author;
-		}
-
 		$scope.articles = [
-			new Article('Writing AngularJS apps using ES6', 'Ravi Kiran'),
-			new Article('Managing Client-Only State In AngularJS', 'Mike Godfrey'),
-			new Article('Framework Fatigue: A Survival Guide', 'Mike Godfrey')
+			{ title: 'Writing AngularJS apps using ES6', author: 'Ravi Kiran' },
+			{ title: 'Managing Client-Only State In AngularJS', author: 'Mike Godfrey' },
+			{ title: 'Framework Fatigue: A Survival Guide', author: 'Mike Godfrey' }
 		];
+		
 	});

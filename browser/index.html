@@ -11,27 +11,27 @@
 		<div ng-controller="CategoryCtrl">
 
 			<ratings class="column" title="JavaScript">
-				<article-count title="ES6" articles="{{categoryArticles['ES6']}}"></article-count>
-				<article-count title="NG" articles="{{categoryArticles['AngularJS']}}"></article-count>
-				<article-count title="React" articles="{{categoryArticles['React']}}"></article-count> 
+				<article-count title="ES6" articles="{{categories['ES6'].articles}}"></article-count>
+				<article-count title="NG" articles="{{categories['AngularJS'].articles}}"></article-count>
+				<article-count title="React" articles="{{categories['React'].articles}}"></article-count> 
 			</ratings>
 
 			<ratings class="column" title="Frameworks">
-				<article-count title="NG" articles="{{categoryArticles['AngularJS']}}"></article-count>
-				<article-count title="React "articles="{{categoryArticles['React']}}"></article-count> 
+				<article-count title="NG" articles="{{categories['AngularJS'].articles}}"></article-count>
+				<article-count title="React "articles="{{categories['React'].articles}}"></article-count> 
 			</ratings>
 
 			<div class="column">
-				<article-count title="NG Only" articles="{{categoryArticles['AngularJS']}}"></article-count>
+				<article-count title="NG Only" articles="{{categories['AngularJS'].articles}}"></article-count>
 			</div>
 
       <div class="column" ng-controller="ArticleCtrl">
         <div ng-repeat="article in articles">
           <p>{{article.title}}</p>
           <p>- {{article.author}}</p>
-          <label ng-repeat="category in categories">
+          <label ng-repeat="(title, category) in categories">
           	<input type="checkbox" ng-checked="category.contains(article)" ng-click="category.toggle(article)" />
-          	{{category.title}}
+          	{{title}}
           </label>
         </div>
       </div>

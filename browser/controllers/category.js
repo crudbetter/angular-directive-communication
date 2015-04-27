@@ -1,8 +1,7 @@
 angular.module('directiveCommunication.controllers')
 
 	.controller('CategoryCtrl', function($scope) {
-		function Category(title) {
-			this.title = title;
+		function Category() {
 			this.articles = [];
 		}
 
@@ -20,17 +19,10 @@ angular.module('directiveCommunication.controllers')
 			}
 		}
 
-		$scope.categories = [
-			new Category('ES6'),
-			new Category('AngularJS'),
-			new Category('React')
-		];
-
-		$scope.$watchCollection('categories', function(categories) {
-			$scope.categoryArticles = categories.reduce(function(map, category) {
-				map[category.title] = category.articles;
-				return map;
-			}, {});
-		})
+		$scope.categories = {
+			'ES6': new Category(),
+			'AngularJS': new Category(),
+			'React': new Category()
+		};
 
 	});
