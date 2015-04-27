@@ -39,6 +39,6 @@ angular.module('directiveCommunication.directives')
 			scope: {
 				title: '@'
 			},
-			templateUrl: 'template/ratings.html'
+			templateUrl: 'templates/authorRatings.html'
 		};
 	});

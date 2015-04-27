@@ -8,7 +8,7 @@ angular.module('directiveCommunication.directives')
 				articles: '@',
 				title: '@'
 			},
-			templateUrl: 'template/articleCount.html',
+			templateUrl: 'templates/articleCount.html',
 			link: function(scope, el, attrs, ratingsCtrl) {
 				scope.$watchCollection('articles', function(articles) {
 					var articleCounts = {};
