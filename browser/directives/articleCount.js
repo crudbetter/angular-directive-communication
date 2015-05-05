@@ -5,16 +5,18 @@ angular.module('directiveCommunication.directives')
 			restrict: 'E',
 			require: '?^authorRatings',
 			scope: {
-				articles: '@',
+				articles: '=',
 				title: '@'
 			},
 			templateUrl: 'templates/articleCount.html',
 			link: function(scope, el, attrs, ratingsCtrl) {
+				var prevAuthorRatings = {};
+
 				scope.$watchCollection('articles', function(articles) {
 					var articleCounts = {};
 					var topArticleCount = 0;
 
-					JSON.parse(articles).forEach(function(article) {
+					articles.forEach(function(article) {
 						if (articleCounts[article.author]) {
 							articleCounts[article.author]++;
 						} else {
@@ -28,12 +30,18 @@ angular.module('directiveCommunication.directives')
 
 					scope.authorRatings = {};
 
-					ratingsCtrl && ratingsCtrl.resetCategory(scope.title);
-
 					for (var author in articleCounts) {
 						scope.authorRatings[author] = ratingsCtrl ? ratingsCtrl.getAuthorRating(author) : new AuthorRating();
 						scope.authorRatings[author].updateCategory(scope.title, articleCounts[author] == topArticleCount);
+
+						delete prevAuthorRatings[author];
 					}
+
+					Object.keys(prevAuthorRatings).forEach(function(author) {
+						prevAuthorRatings[author].resetCategory(scope.title);
+					});
+
+					prevAuthorRatings = scope.authorRatings;
 
 					ratingsCtrl && ratingsCtrl.updateGrouping();
 				});

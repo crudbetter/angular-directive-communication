@@ -11,12 +11,6 @@ angular.module('directiveCommunication.directives')
 			return authorRatings[name];
 		}
 
-		this.resetCategory = function(category) {
-			Object.keys(authorRatings).forEach(function(author) {
-				authorRatings[author].resetCategory(category);
-			});
-		}
-
 		this.updateGrouping = function() {
 			var authors = Object.keys(authorRatings);
 			var topCategoryCount = Math.max.apply(null,
