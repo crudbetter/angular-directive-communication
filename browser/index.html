@@ -11,18 +11,18 @@
 		<div ng-controller="CategoryCtrl">
 
 			<author-ratings class="column" title="JavaScript">
-				<article-count title="ES6" articles="{{categories['ES6'].articles}}"></article-count>
-				<article-count title="NG" articles="{{categories['AngularJS'].articles}}"></article-count>
-				<article-count title="React" articles="{{categories['React'].articles}}"></article-count> 
+				<article-count title="ES6" articles="categories['ES6'].articles"></article-count>
+				<article-count title="NG" articles="categories['AngularJS'].articles"></article-count>
+				<article-count title="React" articles="categories['React'].articles"></article-count> 
 			</author-ratings>
 
 			<author-ratings class="column" title="Frameworks">
-				<article-count title="NG" articles="{{categories['AngularJS'].articles}}"></article-count>
-				<article-count title="React "articles="{{categories['React'].articles}}"></article-count> 
+				<article-count title="NG" articles="categories['AngularJS'].articles"></article-count>
+				<article-count title="React "articles="categories['React'].articles"></article-count> 
 			</author-ratings>
 
 			<div class="column">
-				<article-count title="NG Only" articles="{{categories['AngularJS'].articles}}"></article-count>
+				<article-count title="NG Only" articles="categories['AngularJS'].articles"></article-count>
 			</div>
 
       <div class="column" ng-controller="ArticleCtrl">
