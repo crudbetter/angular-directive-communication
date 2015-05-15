@@ -1,7 +1,7 @@
 angular-directive-communication
 ====================================
 
-Reference repository to accompany a [blog article]() exploring communication between directives in AngularJS.
+Reference repository to accompany a [blog article](http://crudbetter.com/communication-between-angularjs-sibling-directives/) exploring communication between sibling directives in AngularJS.
 
 ### Usage
 

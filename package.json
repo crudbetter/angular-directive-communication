@@ -1,7 +1,7 @@
 {
   "name": "angular-directive-communication",
   "version": "0.0.0",
-  "description": "Exploring communication between directives in AngularJS",
+  "description": "Exploring communication between sibling directives in AngularJS",
   "repository": "https://github.com/crudbetter/angular-directive-communication",
   "license": "MIT",
   "dependencies": {

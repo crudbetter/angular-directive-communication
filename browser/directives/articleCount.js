@@ -10,7 +10,7 @@ angular.module('directiveCommunication.directives')
 			},
 			templateUrl: 'templates/articleCount.html',
 			link: function(scope, el, attrs, ratingsCtrl) {
-				var prevAuthorRatings = {};
+				var authorRatingsToReset = {};
 
 				scope.$watchCollection('articles', function(articles) {
 					var articleCounts = {};
@@ -34,14 +34,14 @@ angular.module('directiveCommunication.directives')
 						scope.authorRatings[author] = ratingsCtrl ? ratingsCtrl.getAuthorRating(author) : new AuthorRating();
 						scope.authorRatings[author].updateCategory(scope.title, articleCounts[author] == topArticleCount);
 
-						delete prevAuthorRatings[author];
+						delete authorRatingsToReset[author];
 					}
 
-					Object.keys(prevAuthorRatings).forEach(function(author) {
-						prevAuthorRatings[author].resetCategory(scope.title);
+					Object.keys(authorRatingsToReset).forEach(function(author) {
+						authorRatingsToReset[author].resetCategory(scope.title);
 					});
 
-					prevAuthorRatings = scope.authorRatings;
+					authorRatingsToReset = scope.authorRatings;
 
 					ratingsCtrl && ratingsCtrl.updateGrouping();
 				});
