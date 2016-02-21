@@ -480,10 +480,10 @@ Below is a demonstration of the fully working example:
 
 Lastly, if you want to see an example of parent and sibling children directives in the wild, check out the [accordion][8] of the Angular UI bootstrap library.
 
- [1]: http://crudbetter.com/wp-content/uploads/2015/05/DirectiveCommunicationMockup1.png
- [2]: http://crudbetter.com/wp-content/uploads/2015/05/DirectiveCommunicationMockup2.png
- [3]: http://crudbetter.com/wp-content/uploads/2015/05/DirectiveCommunicationHighlight.png
+ [1]: DirectiveCommunicationMockup1.png
+ [2]: DirectiveCommunicationMockup2.png
+ [3]: DirectiveCommunicationHighlight.png
  [4]: http://crudbetter.com/angularjs-checkbox-lists/
  [5]: http://twitter.com/crudbetter
- [7]: http://crudbetter.com/wp-content/uploads/2015/05/DirectiveCommunicationDemo.gif
+ [7]: DirectiveCommunicationDemo.gif
  [8]: http://angular-ui.github.io/bootstrap/#/accordion
