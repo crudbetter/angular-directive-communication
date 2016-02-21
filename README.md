@@ -154,7 +154,7 @@ angular.module('directiveCommunication', [
 
 Next is the two controller files, `article.js` and `category.js`. `ArticleCtrl` and `CategoryCtrl` provide the functionalitly for categorising the small list of articles in the far right column, which are then passed into `<article-count>` elements.
 
-This functionality isn't central to the topic of this post (directive communication), so I've discussed it in a separate repository [here][4].
+This functionality isn't central to the topic of this repository (directive communication), so I'll leave the reader to explore if they wish.
 
 ## Directives
 
